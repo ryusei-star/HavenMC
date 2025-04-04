@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用規約 - HavenMC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --primary-light: #818CF8;
+            --primary-dark: #4F46E5;
+            --secondary: #0EA5E9;
+            --light: #FFFFFF;
+            --light-gray: #F1F5F9;
+            --gray: #94A3B8;
+            --dark-gray: #64748B;
+            --dark: #334155;
+            --accent: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(120deg, #f0f4ff 0%, #f9fafb 100%);
+            overflow: hidden;
+        }
+
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary-light) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.15;
+            animation: floatAnimation 20s infinite ease-in-out;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 20px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: rotate(360deg);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-left: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .language-dropdown-btn {
+            display: flex;
+            align-items: center;
+            background-color: #4338ca;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .language-dropdown-btn:hover {
+            background-color: #3730a3;
+        }
+
+        .language-dropdown-btn svg {
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+
+        .language-dropdown.active .language-dropdown-btn svg {
+            transform: rotate(180deg);
+        }
+
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .language-dropdown.active .language-dropdown-content {
+            display: block;
+        }
+
+        .language-option {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .language-option:hover {
+            background-color: #f8fafc;
+            color: #4338ca;
+        }
+
+        .language-option.active {
+            background-color: #eff6ff;
+            color: #4338ca;
+            font-weight: 500;
+        }
+
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .content-container {
+            background-color: var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .content-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .content-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .content-container h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            color: var(--dark);
+        }
+
+        .content-container p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .content-container ul, .content-container ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            color: var(--dark-gray);
+        }
+
+        .content-container li {
+            margin-bottom: 10px;
+        }
+
+        .content-container a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .content-container a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .back-to-home {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .back-to-home::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .back-to-home:hover {
+            color: var(--primary-dark);
+        }
+
+        .back-to-home:hover::after {
+            width: 100%;
+        }
+
+        footer {
+            background-color: var(--light-gray);
+            padding: 80px 0 30px;
+            text-align: center;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-left: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--dark-gray);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .legal-links a {
+            color: var(--dark-gray);
+            margin: 0 15px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .legal-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.95);
+                padding: 20px;
+                clip-path: circle(0% at 100% 0);
+                transition: clip-path 0.5s;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                clip-path: circle(150% at 100% 0);
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .language-dropdown {
+                margin-top: 15px;
+                margin-left: 0;
+            }
+
+            .language-dropdown-content {
+                position: fixed;
+                top: auto;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: 50vh;
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .content-container {
+                padding: 30px 20px;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-links a {
+                margin: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="bg-shapes" id="bg-shapes"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <header id="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="HavenMC Logo" class="logo-img">
+                <span class="logo-text">HavenMC</span>
+            </a>
+            <div class="nav-container">
+                <nav id="nav">
+                    <ul>
+                        <li><a href="index.html#features" data-lang="ja">特徴</a><a href="index.html#features" data-lang="en" style="display: none;">Features</a><a href="index.html#features" data-lang="fr" style="display: none;">Caractéristiques</a></li>
+                        <li><a href="index.html#worlds" data-lang="ja">ワールド</a><a href="index.html#worlds" data-lang="en" style="display: none;">Worlds</a><a href="index.html#worlds" data-lang="fr" style="display: none;">Mondes</a></li>
+                        <li><a href="index.html#join" data-lang="ja">参加方法</a><a href="index.html#join" data-lang="en" style="display: none;">How to Join</a><a href="index.html#join" data-lang="fr" style="display: none;">Comment Rejoindre</a></li>
+                        <li><a href="index.html#discord" data-lang="ja">Discord</a><a href="index.html#discord" data-lang="en" style="display: none;">Discord</a><a href="index.html#discord" data-lang="fr" style="display: none;">Discord</a></li>
+                    </ul>
+                </nav>
+                <div class="language-dropdown" id="language-dropdown">
+                    <button class="language-dropdown-btn" id="language-dropdown-btn">
+                        <span class="dropdown-text" id="current-language">日本語</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown-content">
+                        <div class="language-option" data-lang="ja">
+                            日本語
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="language-option" data-lang="en">
+                            English
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px; display: none;">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="language-option" data-lang="fr">
+                            Français
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px; display: none;">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu" id="mobile-menu">☰</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title" data-lang="ja">利用規約</h1>
+                <h1 class="page-title" data-lang="en" style="display: none;">Terms of Service</h1>
+                <h1 class="page-title" data-lang="fr" style="display: none;">Conditions d'Utilisation</h1>
+                <p class="page-subtitle" data-lang="ja">HavenMCサーバーをご利用いただく際の規約です</p>
+                <p class="page-subtitle" data-lang="en" style="display: none;">Terms for using the HavenMC server</p>
+                <p class="page-subtitle" data-lang="fr" style="display: none;">Conditions d'utilisation du serveur HavenMC</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-container">
+                    <div data-lang="ja">
+                        <h2>利用規約</h2>
+                        <p>最終更新日: 2025年4月4日</p>
+                        <p>HavenMCサーバー（以下「当サーバー」）をご利用いただく前に、以下の利用規約をよくお読みください。当サーバーに参加することにより、あなたはこれらの規約に同意したものとみなされます。</p>
+
+                        <h3>1. 基本ルール</h3>
+                        <ul>
+                            <li>他のプレイヤーに対する嫌がらせ、暴言、差別的発言は禁止です。</li>
+                            <li>チート、ハック、不正なMODの使用は禁止です。</li>
+                            <li>サーバーに過度な負荷をかける行為（ラグマシンの作成など）は禁止です。</li>
+                            <li>他のプレイヤーの建築物や所有物を許可なく破壊したり、盗んだりすることは禁止です。</li>
+                            <li>サーバー運営を妨害する行為は禁止です。</li>
+                        </ul>
+
+                        <h3>2. アカウントと責任</h3>
+                        <ul>
+                            <li>あなたは自分のMinecraftアカウントとその行動に責任を持ちます。</li>
+                            <li>アカウントの共有や売買は禁止されています。</li>
+                            <li>パスワードの管理は自己責任で行ってください。アカウントが乗っ取られた場合でも、そのアカウントで行われた行為はあなたの責任となります。</li>
+                        </ul>
+
+                        <h3>3. コンテンツと著作権</h3>
+                        <ul>
+                            <li>当サーバー内で作成されたコンテンツの著作権は、特に明記されていない限り、作成者に帰属します。</li>
+                            <li>サーバー内の建築物やスクリーンショットをSNSなどで共有する場合は、適切なクレジット表記をお願いします。</li>
+                            <li>当サーバーの名前やロゴを無断で商用利用することは禁止されています。</li>
+                        </ul>
+
+                        <h3>4. プライバシーとデータ</h3>
+                        <ul>
+                            <li>当サーバーでは、サーバーの運営とセキュリティのために必要な最低限のデータを収集することがあります。</li>
+                            <li>収集されるデータには、Minecraftのユーザー名、UUID、IPアドレス、プレイ時間、チャットログなどが含まれる場合があります。</li>
+                            <li>これらのデータの取り扱いについては、<a href="privacy-policy.html">プライバシーポリシー</a>をご確認ください。</li>
+                        </ul>
+
+                        <h3>5. 禁止事項</h3>
+                        <ul>
+                            <li>政治的、宗教的、または論争を招く可能性のある内容の宣伝や議論</li>
+                            <li>性的、暴力的、または不適切なコンテンツの作成や共有</li>
+                            <li>個人情報の収集や共有</li>
+                            <li>サーバーの脆弱性を悪用する行為</li>
+                            <li>サーバーのパフォーマンスに悪影響を与える行為</li>
+                            <li>その他、運営チームが不適切と判断する行為</li>
+                        </ul>
+
+                        <h3>6. 罰則</h3>
+                        <p>上記のルールに違反した場合、以下のような罰則が適用される場合があります：</p>
+                        <ul>
+                            <li>警告</li>
+                            <li>一時的なミュート（チャット禁止）</li>
+                            <li>一時的なBAN（アクセス禁止）</li>
+                            <li>永久BAN</li>
+                        </ul>
+                        <p>罰則の適用は運営チームの裁量によって決定され、違反の重大性や頻度によって異なります。</p>
+
+                        <h3>7. 免責事項</h3>
+                        <ul>
+                            <li>当サーバーは予告なくメンテナンスやアップデートを行うことがあります。</li>
+                            <li>サーバーのダウンタイムやデータ損失について、運営チームは責任を負いません。</li>
+                            <li>プレイヤー間のトラブルについて、運営チームは可能な限り対応しますが、全ての問題を解決できるとは限りません。</li>
+                        </ul>
+
+                        <h3>8. 規約の変更</h3>
+                        <p>当サーバーは、必要に応じてこの利用規約を変更する権利を有します。変更があった場合は、サーバー内のお知らせやDiscordサーバーで通知します。変更後も当サーバーを利用し続けることで、新しい規約に同意したものとみなされます。</p>
+
+                        <h3>9. お問い合わせ</h3>
+                        <p>この利用規約に関するご質問やご意見は、Discordサーバーの専用チャンネルまでお寄せください。</p>
+
+                        <a href="index.html" class="back-to-home">ホームに戻る</a>
+                    </div>
+
+                    <div data-lang="en" style="display: none;">
+                        <h2>Terms of Service</h2>
+                        <p>Last Updated: April 4, 2025</p>
+                        <p>Please read the following terms of service carefully before using the HavenMC server (hereinafter referred to as "the server"). By joining the server, you are deemed to have agreed to these terms.</p>
+
+                        <h3>1. Basic Rules</h3>
+                        <ul>
+                            <li>Harassment, abusive language, and discriminatory remarks towards other players are prohibited.</li>
+                            <li>The use of cheats, hacks, or unauthorized mods is prohibited.</li>
+                            <li>Actions that place excessive load on the server (such as creating lag machines) are prohibited.</li>
+                            <li>Destroying or stealing other players' buildings or possessions without permission is prohibited.</li>
+                            <li>Actions that interfere with server operations are prohibited.</li>
+                        </ul>
+
+                        <h3>2. Accounts and Responsibilities</h3>
+                        <ul>
+                            <li>You are responsible for your Minecraft account and its actions.</li>
+                            <li>Sharing or selling accounts is prohibited.</li>
+                            <li>Password management is your responsibility. Even if your account is compromised, you are still responsible for actions taken with that account.</li>
+                        </ul>
+
+                        <h3>3. Content and Copyright</h3>
+                        <ul>
+                            <li>Copyright for content created on the server belongs to the creator, unless otherwise specified.</li>
+                            <li>When sharing screenshots or builds from the server on social media, please provide appropriate credit.</li>
+                            <li>Unauthorized commercial use of the server's name or logo is prohibited.</li>
+                        </ul>
+
+                        <h3>4. Privacy and Data</h3>
+                        <ul>
+                            <li>The server may collect minimal necessary data for server operation and security.</li>
+                            <li>Collected data may include Minecraft username, UUID, IP address, play time, chat logs, etc.</li>
+                            <li>For details on how this data is handled, please check the <a href="privacy-policy.html">Privacy Policy</a>.</li>
+                        </ul>
+
+                        <h3>5. Prohibited Actions</h3>
+                        <ul>
+                            <li>Promotion or discussion of political, religious, or potentially controversial content</li>
+                            <li>Creation or sharing of sexual, violent, or inappropriate content</li>
+                            <li>Collection or sharing of personal information</li>
+                            <li>Exploiting server vulnerabilities</li>
+                            <li>Actions that negatively impact server performance</li>
+                            <li>Other actions deemed inappropriate by the administration team</li>
+                        </ul>
+
+                        <h3>6. Penalties</h3>
+                        <p>Violation of the above rules may result in the following penalties:</p>
+                        <ul>
+                            <li>Warning</li>
+                            <li>Temporary mute (chat restriction)</li>
+                            <li>Temporary ban (access restriction)</li>
+                            <li>Permanent ban</li>
+                        </ul>
+                        <p>The application of penalties is determined at the discretion of the administration team and varies depending on the severity and frequency of violations.</p>
+
+                        <h3>7. Disclaimer</h3>
+                        <ul>
+                            <li>The server may conduct maintenance or updates without prior notice.</li>
+                            <li>The administration team is not responsible for server downtime or data loss.</li>
+                            <li>While the administration team will respond to issues between players as much as possible, not all problems can be resolved.</li>
+                        </ul>
+
+                        <h3>8. Changes to Terms</h3>
+                        <p>The server reserves the right to change these terms of service as necessary. If changes are made, they will be announced on the server and on the Discord server. By continuing to use the server after changes, you are deemed to have agreed to the new terms.</p>
+
+                        <h3>9. Contact</h3>
+                        <p>If you have any questions or comments about these terms of service, please contact us through the dedicated channel on our Discord server.</p>
+
+                        <a href="index.html" class="back-to-home">Return to Home</a>
+                    </div>
+
+                    <div data-lang="fr" style="display: none;">
+                        <h2>Conditions d'Utilisation</h2>
+                        <p>Dernière mise à jour : 4 avril 2025</p>
+                        <p>Veuillez lire attentivement les conditions d'utilisation suivantes avant d'utiliser le serveur HavenMC (ci-après dénommé "le serveur"). En rejoignant le serveur, vous êtes réputé avoir accepté ces conditions.</p>
+
+                        <h3>1. Règles de Base</h3>
+                        <ul>
+                            <li>Le harcèlement, le langage abusif et les remarques discriminatoires envers d'autres joueurs sont interdits.</li>
+                            <li>L'utilisation de triches, de hacks ou de mods non autorisés est interdite.</li>
+                            <li>Les actions qui imposent une charge excessive au serveur (comme la création de machines à lag) sont interdites.</li>
+                            <li>La destruction ou le vol des constructions ou possessions d'autres joueurs sans permission est interdit.</li>
+                            <li>Les actions qui interfèrent avec les opérations du serveur sont interdites.</li>
+                        </ul>
+
+                        <h3>2. Comptes et Responsabilités</h3>
+                        <ul>
+                            <li>Vous êtes responsable de votre compte Minecraft et de ses actions.</li>
+                            <li>Le partage ou la vente de comptes est interdit.</li>
+                            <li>La gestion du mot de passe est votre responsabilité. Même si votre compte est compromis, vous restez responsable des actions effectuées avec ce compte.</li>
+                        </ul>
+
+                        <h3>3. Contenu et Droits d'Auteur</h3>
+                        <ul>
+                            <li>Les droits d'auteur pour le contenu créé sur le serveur appartiennent au créateur, sauf indication contraire.</li>
+                            <li>Lorsque vous partagez des captures d'écran ou des constructions du serveur sur les réseaux sociaux, veuillez fournir les crédits appropriés.</li>
+                            <li>L'utilisation commerciale non autorisée du nom ou du logo du serveur est interdite.</li>
+                        </ul>
+
+                        <h3>4. Confidentialité et Données</h3>
+                        <ul>
+                            <li>Le serveur peut collecter les données minimales nécessaires pour le fonctionnement et la sécurité du serveur.</li>
+                            <li>Les données collectées peuvent inclure le nom d'utilisateur Minecraft, l'UUID, l'adresse IP, le temps de jeu, les journaux de chat, etc.</li>
+                            <li>Pour plus de détails sur la façon dont ces données sont traitées, veuillez consulter la <a href="privacy-policy.html">Politique de Confidentialité</a>.</li>
+                        </ul>
+
+                        <h3>5. Actions Interdites</h3>
+                        <ul>
+                            <li>Promotion ou discussion de contenu politique, religieux ou potentiellement controversé</li>
+                            <li>Création ou partage de contenu sexuel, violent ou inapproprié</li>
+                            <li>Collecte ou partage d'informations personnelles</li>
+                            <li>Exploitation des vulnérabilités du serveur</li>
+                            <li>Actions qui ont un impact négatif sur les performances du serveur</li>
+                            <li>Autres actions jugées inappropriées par l'équipe d'administration</li>
+                        </ul>
+
+                        <h3>6. Sanctions</h3>
+                        <p>La violation des règles ci-dessus peut entraîner les sanctions suivantes :</p>
+                        <ul>
+                            <li>Avertissement</li>
+                            <li>Mute temporaire (restriction du chat)</li>
+                            <li>Bannissement temporaire (restriction d'accès)</li>
+                            <li>Bannissement permanent</li>
+                        </ul>
+                        <p>L'application des sanctions est déterminée à la discrétion de l'équipe d'administration et varie en fonction de la gravité et de la fréquence des violations.</p>
+
+                        <h3>7. Clause de Non-Responsabilité</h3>
+                        <ul>
+                            <li>Le serveur peut effectuer des maintenances ou des mises à jour sans préavis.</li>
+                            <li>L'équipe d'administration n'est pas responsable des temps d'arrêt du serveur ou de la perte de données.</li>
+                            <li>Bien que l'équipe d'administration réponde aux problèmes entre joueurs autant que possible, tous les problèmes ne peuvent pas être résolus.</li>
+                        </ul>
+
+                        <h3>8. Modifications des Conditions</h3>
+                        <p>Le serveur se réserve le droit de modifier ces conditions d'utilisation si nécessaire. Si des modifications sont apportées, elles seront annoncées sur le serveur et sur le serveur Discord. En continuant à utiliser le serveur après les modifications, vous êtes réputé avoir accepté les nouvelles conditions.</p>
+
+                        <h3>9. Contact</h3>
+                        <p>Si vous avez des questions ou des commentaires concernant ces conditions d'utilisation, veuillez nous contacter via le canal dédié sur notre serveur Discord.</p>
+
+                        <a href="index.html" class="back-to-home">Retour à l'Accueil</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="HavenMC Logo" class="footer-logo-img">
+                <span class="footer-logo-text">HavenMC</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#features" data-lang="ja">特徴</a>
+                <a href="index.html#features" data-lang="en" style="display: none;">Features</a>
+                <a href="index.html#features" data-lang="fr" style="display: none;">Caractéristiques</a>
+                <a href="index.html#worlds" data-lang="ja">ワールド</a>
+                <a href="index.html#worlds" data-lang="en" style="display: none;">Worlds</a>
+                <a href="index.html#worlds" data-lang="fr" style="display: none;">Mondes</a>
+                <a href="index.html#join" data-lang="ja">参加方法</a>
+                <a href="index.html#join" data-lang="en" style="display: none;">How to Join</a>
+                <a href="index.html#join" data-lang="fr" style="display: none;">Comment Rejoindre</a>
+                <a href="index.html#discord" data-lang="ja">Discord</a>
+                <a href="index.html#discord" data-lang="en" style="display: none;">Discord</a>
+                <a href="index.html#discord" data-lang="fr" style="display: none;">Discord</a>
+            </div>
+            <div class="legal-links">
+                <a href="privacy-policy.html" data-lang="ja">プライバシーポリシー</a>
+                <a href="privacy-policy.html" data-lang="en" style="display: none;">Privacy Policy</a>
+                <a href="privacy-policy.html" data-lang="fr" style="display: none;">Politique de Confidentialité</a>
+                <a href="terms-of-service.html" data-lang="ja">利用規約</a>
+                <a href="terms-of-service.html" data-lang="en" style="display: none;">Terms of Service</a>
+                <a href="terms-of-service.html" data-lang="fr" style="display: none;">Conditions d'Utilisation</a>
+            </div>
+            <p class="copyright" data-lang="ja">© 2025 HavenMC. All rights reserved.</p>
+            <p class="copyright" data-lang="en" style="display: none;">© 2025 HavenMC. All rights reserved.</p>
+            <p class="copyright" data-lang="fr" style="display: none;">© 2025 HavenMC. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        function createShapes() {
+            const container = document.getElementById('bg-shapes');
+            const shapeCount = 5;
+
+            for (let i = 0; i < shapeCount; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+
+                const size = Math.random() * 300 + 200;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = i * 3;
+
+                shape.style.width = `${size}px`;
+                shape.style.height = `${size}px`;
+                shape.style.left = `${left}%`;
+                shape.style.top = `${top}%`;
+                shape.style.animationDelay = `${delay}s`;
+
+                container.appendChild(shape);
+            }
+        }
+
+        function handleScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            createShapes();
+
+            window.addEventListener('scroll', handleScroll);
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.addEventListener('click', toggleMobileMenu);
+        });
+    </script>
+    <script src="language-switcher.js"></script>
+</body>
+</html>
